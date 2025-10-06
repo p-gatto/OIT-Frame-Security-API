@@ -1,0 +1,36 @@
+﻿dotnet ef migrations add "InitialMigration" -o "Data\Migrations" --context ApplicationDbContext
+
+dotnet ef migrations add "Modified Menu" -o "Data\Migrations" --context ApplicationDbContext
+
+dotnet ef migrations add "Modified Menu Title" -o "Data\Migrations" --context ApplicationDbContext
+
+dotnet ef database update --context ApplicationDbContext
+
+
+
+
+dotnet tool update --global dotnet-ef --version 8.0.20
+
+
+# 1. Crea una nuova migrazione per l'autenticazione
+dotnet ef migrations add "AddAuthenticationEntities" -o "Data\Migrations" --context ApplicationDbContext
+
+# 2. Aggiorna il database
+dotnet ef database update --context ApplicationDbContext
+
+# 3. Verifica che tutto sia andato a buon fine
+dotnet ef migrations list --context ApplicationDbContext
+
+# NOTA: Se ci sono problemi con la migrazione esistente, puoi:
+# 1. Rimuovere la migrazione corrente:
+#    dotnet ef database update 0 --context ApplicationDbContext
+#    dotnet ef migrations remove --context ApplicationDbContext
+# 
+# 2. Creare una nuova migrazione completa:
+#    dotnet ef migrations add "CompleteSchema" -o "Data\Migrations" --context ApplicationDbContext
+#    dotnet ef database update --context ApplicationDbContext
+
+# Credenziali di default dopo la migrazione:
+# Username: admin
+# Password: Admin123!
+# Questo utente appartiene al gruppo "Administrators" e ha tutti i permessi.
