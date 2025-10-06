@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 // Swagger con supporto JWT
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "OIT Frame API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "OIT Frame Security API", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",

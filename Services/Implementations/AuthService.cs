@@ -133,6 +133,8 @@ namespace OIT_Frame_Security_API.Services.Implementations
             using var sha256 = SHA256.Create();
             var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
             var hashedPassword = Convert.ToBase64String(hashedBytes);
+            Console.WriteLine($"Password Hashed in ** VerifiyPassword ** : {hashedPassword}");
+            Console.WriteLine($"Password Hashed from DB : {passwordHash}");
             return hashedPassword == passwordHash;
         }
     }

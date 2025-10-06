@@ -25,21 +25,21 @@ namespace OIT_Frame_Security_API.Data
 
             // Create Menu Items - BackOffice
             var backofficeItems = new List<MenuItem>
-        {
-            new() { Icon = "dashboard", Label = "Dashboard", Route = "/admin/dashboard", Section = "backoffice", Order = 1 },
-            new() { Icon = "people", Label = "Utenti", Route = "/admin/users", Section = "backoffice", Order = 2 },
-            new() { Icon = "settings", Label = "Impostazioni", Route = "/admin/settings", Section = "backoffice", Order = 3 },
-            new() { Icon = "assessment", Label = "Report", Route = "/admin/reports", Section = "backoffice", Order = 4 }
-        };
+            {
+                new() { Icon = "dashboard", Label = "Dashboard", Route = "/admin/dashboard", Section = "backoffice", Order = 1 },
+                new() { Icon = "people", Label = "Utenti", Route = "/admin/users", Section = "backoffice", Order = 2 },
+                new() { Icon = "settings", Label = "Impostazioni", Route = "/admin/settings", Section = "backoffice", Order = 3 },
+                new() { Icon = "assessment", Label = "Report", Route = "/admin/reports", Section = "backoffice", Order = 4 }
+            };
 
             // Create Menu Items - FrontOffice
             var frontofficeItems = new List<MenuItem>
-        {
-            new() { Icon = "home", Label = "Home", Route = "/home", Section = "frontoffice", Order = 1 },
-            new() { Icon = "shopping_cart", Label = "Prodotti", Route = "/products", Section = "frontoffice", Order = 2 },
-            new() { Icon = "contact_mail", Label = "Contatti", Route = "/contact", Section = "frontoffice", Order = 3 },
-            new() { Icon = "info", Label = "Chi Siamo", Route = "/about", Section = "frontoffice", Order = 4 }
-        };
+            {
+                new() { Icon = "home", Label = "Home", Route = "/home", Section = "frontoffice", Order = 1 },
+                new() { Icon = "shopping_cart", Label = "Prodotti", Route = "/products", Section = "frontoffice", Order = 2 },
+                new() { Icon = "contact_mail", Label = "Contatti", Route = "/contact", Section = "frontoffice", Order = 3 },
+                new() { Icon = "info", Label = "Chi Siamo", Route = "/about", Section = "frontoffice", Order = 4 }
+            };
 
             await context.MenuItems.AddRangeAsync(backofficeItems);
             await context.MenuItems.AddRangeAsync(frontofficeItems);
@@ -68,7 +68,7 @@ namespace OIT_Frame_Security_API.Data
 
             await context.SaveChangesAsync();
 
-            // Create Users
+            // Create Users con password corrette
             var adminUser = new User
             {
                 Username = "admin",
@@ -97,6 +97,11 @@ namespace OIT_Frame_Security_API.Data
             await context.UserRoles.AddAsync(new UserRole { UserId = normalUser.Id, RoleId = userRole.Id });
 
             await context.SaveChangesAsync();
+
+            // DEBUG: Stampa gli hash per verificare
+            Console.WriteLine($"Admin Password Hash: {adminUser.PasswordHash}");
+            Console.WriteLine($"User Password Hash: {normalUser.PasswordHash}");
+            Console.WriteLine($"Test Admin123! Hash: {HashPassword("Admin123!")}");
         }
 
         private static string HashPassword(string password)
